@@ -23,6 +23,8 @@ public class PokerTexture {
 	public static AtlasRegion menuBtn;
 	public static AtlasRegion menuBtnDown;
 	public static AtlasRegion baiUp;
+	public static AtlasRegion infoUser;
+	public static List<AtlasRegion> labai;
 
 	static public void finishLoading() {
 		manager.finishLoading();
