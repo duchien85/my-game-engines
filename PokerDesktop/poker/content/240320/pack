@@ -87,6 +87,20 @@ infoUser
   orig: 48, 68
   offset: 0, 0
   index: -1
+readyBtnDown
+  rotate: false
+  xy: 524, 324
+  size: 202, 54
+  orig: 202, 54
+  offset: 0, 0
+  index: -1
+readyBtn
+  rotate: false
+  xy: 728, 324
+  size: 202, 54
+  orig: 202, 54
+  offset: 0, 0
+  index: -1
 baiUp
   rotate: false
   xy: 966, 72
@@ -96,14 +110,14 @@ baiUp
   index: -1
 quickPlayBtnDown
   rotate: false
-  xy: 524, 324
+  xy: 323, 400
   size: 157, 52
   orig: 157, 52
   offset: 0, 0
   index: -1
 quickPlayBtn
   rotate: false
-  xy: 683, 324
+  xy: 482, 400
   size: 157, 52
   orig: 157, 52
   offset: 0, 0
@@ -222,21 +236,21 @@ veBa
   index: -1
 chuSanSang
   rotate: false
-  xy: 842, 324
+  xy: 641, 400
   size: 96, 32
   orig: 96, 32
   offset: 0, 0
   index: -1
 backBtnDown
   rotate: false
-  xy: 842, 358
+  xy: 932, 324
   size: 36, 29
   orig: 36, 29
   offset: 0, 0
   index: -1
 backBtn
   rotate: false
-  xy: 880, 358
+  xy: 932, 355
   size: 36, 29
   orig: 36, 29
   offset: 0, 0
@@ -250,35 +264,35 @@ okBtnDown
   index: -1
 okBtn
   rotate: false
-  xy: 940, 324
+  xy: 970, 324
   size: 34, 23
   orig: 34, 23
   offset: 0, 0
   index: -1
 cancelBtnDown
   rotate: false
-  xy: 976, 324
+  xy: 970, 349
   size: 34, 23
   orig: 34, 23
   offset: 0, 0
   index: -1
 cancelBtn
   rotate: false
-  xy: 940, 349
+  xy: 970, 374
   size: 34, 23
   orig: 34, 23
   offset: 0, 0
   index: -1
 menuBtnDown
   rotate: false
-  xy: 940, 374
+  xy: 739, 400
   size: 30, 23
   orig: 30, 23
   offset: 0, 0
   index: -1
 menuBtn
   rotate: false
-  xy: 976, 349
+  xy: 739, 425
   size: 30, 23
   orig: 30, 23
   offset: 0, 0
@@ -647,151 +661,151 @@ labai
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 27
+  index: 28
 labai
   rotate: false
   xy: 217, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 26
+  index: 27
 labai
   rotate: false
   xy: 260, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 25
+  index: 26
 labai
   rotate: false
   xy: 260, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 24
+  index: 25
 labai
   rotate: false
   xy: 303, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 23
+  index: 24
 labai
   rotate: false
   xy: 303, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 22
+  index: 23
 labai
   rotate: false
   xy: 346, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 21
+  index: 22
 labai
   rotate: false
   xy: 346, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 20
+  index: 21
 labai
   rotate: false
   xy: 389, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 2
+  index: 20
 labai
   rotate: false
   xy: 389, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 19
+  index: 2
 labai
   rotate: false
   xy: 432, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 18
+  index: 19
 labai
   rotate: false
   xy: 432, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 17
+  index: 18
 labai
   rotate: false
   xy: 475, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 16
+  index: 17
 labai
   rotate: false
   xy: 475, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 15
+  index: 16
 labai
   rotate: false
   xy: 518, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 14
+  index: 15
 labai
   rotate: false
   xy: 518, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 13
+  index: 14
 labai
   rotate: false
   xy: 561, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 12
+  index: 13
 labai
   rotate: false
   xy: 561, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 11
+  index: 12
 labai
   rotate: false
   xy: 604, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 10
+  index: 11
 labai
   rotate: false
   xy: 604, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 1
+  index: 10
 labai
   rotate: false
   xy: 647, 2
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: 0
-cayAbich
+  index: 1
+labai
   rotate: false
   xy: 647, 57
   size: 41, 53
   orig: 41, 53
   offset: 0, 0
-  index: -1
+  index: 0

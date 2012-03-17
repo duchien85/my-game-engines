@@ -1,6 +1,7 @@
 package com.vng.poker;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.gsn.poker.game.MyPoker;
 import com.gsn.poker.game.PokerGame;
 
 public class Desktop {
@@ -23,7 +24,7 @@ public class Desktop {
 	}
 	
 	public static void binder(){
-
+		MyPoker.game = game;
 	}
 	
 	static PokerGame game;
