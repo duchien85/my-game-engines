@@ -1,5 +1,6 @@
 package com.vng.poker;
 
+import com.badlogic.gdx.backends.jogl.JoglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.gsn.poker.game.MyPoker;
 import com.gsn.poker.game.PokerGame;
@@ -31,7 +32,8 @@ public class Desktop {
 	
 	public static void createGame(int width, int height) {
 		game  = new PokerGame();		
-		new LwjglApplication(game, "My Caro", height, width, false);
+		//new LwjglApplication(game, "My Caro", height, width, false);
+		new JoglApplication(game, "My Caro", height, width, false);
 		binder();
 	}
 
