@@ -3,20 +3,28 @@ package com.gsn.poker.play;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Delay;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
 import com.badlogic.gdx.scenes.scene2d.actions.Remove;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.gsn.engine.ActorUtility;
 import com.gsn.engine.template.GsnLabel;
 import com.gsn.poker.asset.PokerTexture;
-import com.gsn.poker.play.Card.EChat;
+import com.gsn.poker.game.DataProvider;
+import com.gsn.poker.logic.Card;
 
 public class PlayerGroup extends Group {
+	protected boolean available;
+	AvatarUser avatar;
 	CardGroup cardGroup;
-	int pad = 5;
 	int id;
-	public PlayerGroup(int id) {
+	UserInfo info;
+	int pad = 5;
+	private BoardLayer boardLayer;
+	
+	public PlayerGroup(BoardLayer boardLayer, int id) {
 		this.id = id;
-		Image avatar = new Image(PokerTexture.infoUser);
+		this.boardLayer = boardLayer;
+		avatar = new AvatarUser();
 		addActor(avatar);		
 		
 		cardGroup = new CardGroup();
@@ -25,6 +33,19 @@ public class PlayerGroup extends Group {
 		
 		this.width = avatar.x + avatar.width + pad + cardGroup.width;
 		this.height = avatar.height;
+		
+		setAvailable(false);
+	}
+	
+	public boolean isAvailable(){
+		return available;
+	}
+	
+	public void setAvailable(boolean _available){
+		available = _available;
+		visible = available;
+		
+		
 	}
 	
 	public void setText(String text, float duration){
@@ -33,5 +54,15 @@ public class PlayerGroup extends Group {
 		label.action(Delay.$(Remove.$(), duration));
 		addActor(label);
 		
+	}
+	
+	public void setUserInfo(UserInfo info){
+		this.info = info;		
+		avatar.setGold(info.gold);
+		avatar.setName(info.name);
+	}
+	
+	public void nhanBai(int idCard){
+		cardGroup.nhanBai(idCard);
 	}
 }
