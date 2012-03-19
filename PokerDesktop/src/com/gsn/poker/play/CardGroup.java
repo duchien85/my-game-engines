@@ -1,18 +1,16 @@
 package com.gsn.poker.play;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.gsn.poker.asset.PokerTexture;
-import com.gsn.poker.play.Card.EChat;
 
 public class CardGroup extends Group {
 	final static int NO_CARD = 5;
-	Card[] cards = new Card[NO_CARD];
+	int numCard = 0;
+	CardImg[] cards = new CardImg[NO_CARD];
 	int pad;
 	int id;
 	public CardGroup() {		
 		for (int i = 0; i < NO_CARD; i++){			
-			cards[i] = Card.createCard(8 + i, EChat.RO);
+			cards[i] = new CardImg(52);
 			pad = (int) (cards[i].width / 2);
 			if (i == 0){
 				cards[i].x = 0;
@@ -22,9 +20,16 @@ public class CardGroup extends Group {
 				cards[i].y = 0;
 			}
 			addActor(cards[i]);
+			cards[i].visible = false;
 		}
 		
 		this.width = cards[NO_CARD - 1].x + cards[NO_CARD - 1].width;
 		this.height = cards[NO_CARD - 1].height;
+	}
+	
+	public void nhanBai(int id){
+		cards[numCard].setId(id);
+		cards[numCard].visible = true;
+		numCard++;
 	}
 }
