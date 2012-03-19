@@ -56,7 +56,7 @@ public class BoardLayer extends GsnLayer {
 		players[3].setUserInfo(userInfo);
 		
 		players[1].setAvailable(true);
-		//players[1].setUserInfo(userInfo);
+		players[1].setUserInfo(userInfo);
 	}
 	
 	private void chia2LaDau(int id1, int id2) {

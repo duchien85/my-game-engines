@@ -1,0 +1,114 @@
+
+login: 
+send: {"ext":"Pokerhk","_cmd":"14","params":{}}
+receive: {"cmdID":56,"index":1} - daily gift
+receive: {"pInfo":{"moneyGiftReceived":0,"lastDate":13068115,"loginCount":1,"onlineCount":1,"uName":"acc724","avtURL":"","uId":-1,"isNeedReloadG":false,"timeCountDownToInvite":0,"hasPromo":false,"escapeCount":0,"numSupport":2,"bean":10000,"dogfall":0,"timeLogin":1331799289828,"receiveCount":0,"lostCount":0,"NumGift":0,"winCount":0,"firstLogin":1331799289828,"coin":3,"SendGiftTime":30,"isNewInDB":true,"friendReceivedGift":[],"score":0},"cmdID":15,"hasPlayerInit":false}
+
+-----------------------------------------------------------------
+chon kenh: {"ext":"Pokerhk","_cmd":"200","params":{"channelId":0}} - CMD_SELECT_CHANNEL
+
+Receive : {"tableList":[],"selectedLeaf":0,"errorCode":0,"cmdID":200}
+Receive : {"tableList":[],"cmdID":203} - CMD_UPDATE_LEAF
+Receive : {"tableList":[],"cmdID":203}
+
+-----------------------------------------------------------------
+
+choi ngay:
+
+Send {"ext":"Pokerhk","_cmd":"206","params":{}}   - CMD_QUICK_PLAY
+Receive : {"cmdID":57,"reason":0} - ko thay doi thu  - CMD_JOIN_ROOM_FAIL
+
+----------------------------------------------------------
+Tao phong
+Send {"ext":"Pokerhk","_cmd":"204","params":{"type":1,"minGold":123,"password":"","tableName":"haha","bet":15}} - CMD_CREATE_ROOM
+
+Receive : {"betType":1,"roomID":0,"playerStatus":[1,0,0,0,0],"myChair":0,"comissionJackpot":1,"playerList":[{"score":0,"isNeedReloadG":false,"uName":"acc919","avtURL":"","isNewInDB":true,"timeLogin":1331799556062,"loginCount":1,"SendGiftTime":30,"firstLogin":1331799556078,"receiveCount":0,"numSupport":2,"escapeCount":0,"hasPromo":false,"dogfall":0,"uId":-1,"moneyGiftReceived":0,"lostCount":0,"NumGift":0,"winCount":0,"bean":10000,"coin":3,"timeCountDownToInvite":0,"onlineCount":1,"friendReceivedGift":[],"lastDate":13068115},{"score":-30,"isNeedReloadG":false,"uName":"acc347","avtURL":"","isNewInDB":true,"timeLogin":1331798607984,"loginCount":1,"SendGiftTime":30,"firstLogin":1331798608140,"receiveCount":0,"numSupport":2,"escapeCount":0,"hasPromo":false,"dogfall":0,"uId":-1,"moneyGiftReceived":0,"lostCount":1,"NumGift":0,"winCount":0,"bean":9970,"coin":3,"timeCountDownToInvite":0,"onlineCount":1,"friendReceivedGift":[],"lastDate":13068115},{"score":-30,"isNeedReloadG":false,"uName":"acc297","avtURL":"","isNewInDB":true,"timeLogin":1331798679578,"loginCount":1,"SendGiftTime":30,"firstLogin":1331798679750,"receiveCount":0,"numSupport":2,"escapeCount":0,"hasPromo":false,"dogfall":0,"uId":-1,"moneyGiftReceived":0,"lostCount":1,"NumGift":0,"winCount":0,"bean":9970,"coin":3,"timeCountDownToInvite":0,"onlineCount":1,"friendReceivedGift":[],"lastDate":13068115},null,null],"autoKickTime":[-1,-1,-1,-1,-1],"comission":5,"cmdID":3}
+-CMD_JOIN_ROOM_SUCCESS
+
+Send {"ext":"Pokerhk","_cmd":"10","params":{}} - CMD_REQUEST_BASEINFO
+
+Receive : {"roomID":0,"roomOwnerID":0,"playerChip":[10000,0,0,0,0],"moneyBet":15,"cmdID":11} - CMD_NOTIFY_BASEINFO
+
+Receive : {"tableList":[{"type":0,"personCount":1,"tableId":0,"tableName":"haha","requiredPass":false,"bet":0}],"cmdID":203}
+CMD_UPDATE_LEAF
+------------------------------------------------------------------------
+Choi ngay thayd oi thu
+
+Send {"_cmd":"206","ext":"Pokerhk","params":{}}
+Receive : 
+{"playerStatus":[1,1,0,0,0],"autoKickTime":[-1,-1,-1,-1,-1],"myChair":1,"comission":5,"roomID":1,"playerList":[{"isNewInDB":true,"friendReceivedGift":[],"timeLogin":1331801091578,"isNeedReloadG":false,"score":0,"hasPromo":false,"avtURL":"","moneyGiftReceived":0,"winCount":0,"coin":3,"uName":"acc881","loginCount":1,"escapeCount":0,"uId":-1,"lastDate":13068115,"dogfall":0,"onlineCount":1,"lostCount":0,"SendGiftTime":30,"receiveCount":0,"numSupport":2,"bean":10000,"NumGift":0,"firstLogin":1331801091656,"timeCountDownToInvite":0},{"isNewInDB":true,"friendReceivedGift":[],"timeLogin":1331800998578,"isNeedReloadG":false,"score":0,"hasPromo":false,"avtURL":"","moneyGiftReceived":0,"winCount":0,"coin":3,"uName":"acc483","loginCount":1,"escapeCount":0,"uId":-1,"lastDate":13068115,"dogfall":0,"onlineCount":1,"lostCount":0,"SendGiftTime":30,"receiveCount":0,"numSupport":2,"bean":10000,"NumGift":0,"firstLogin":1331800998593,"timeCountDownToInvite":0},null,null,null],"betType":1,"comissionJackpot":1,"cmdID":3}
+- CMD_JOIN_ROOM_SUCCESS
+
+Send {"_cmd":"10","ext":"Pokerhk","params":{}}
+
+Receive : {"moneyBet":10,"roomID":1,"roomOwnerID":0,"cmdID":11,"playerChip":[10000,10000,0,0,0]}
+---------------------------------------------------------------------------
+san sang:
+
+Send {"_cmd":"5","ext":"Pokerhk","params":{}} - CMD_REQUEST_READY
+
+
+Receive : {"cmdID":6,"nChair":1} - CMD_NOTIFY_USER_READY
+-----------------------
+ng khac (minh) bi kich
+Receive : {"chair":2,"cmdID":12,"reason":1} - CMD_NOTIFY_KICK_FROM_ROOM
+------------------------
+trong tran dau:
+Send {"_cmd":"5","ext":"Pokerhk","params":{}}
+Receive : {"cmdID":6,"nChair":2}
+Receive : {"playerChip":[9970,9970,9970,0,0],"players":[true,true,true,false,false],"dealerID":0,"minBet":30,"cmdID":7}  - CMD_NOTIFY_GAME_START
+Receive : {"autoKickTime":[-1,-1,-1,-1,-1],"cmdID":58} - CMD_UPDATE_AUTOKICK
+
+Send {"_cmd":"108","ext":"Pokerhk","params":{}} - CMD_NOTIFY_DEAL_CARD_DONE
+Receive : {"card2":[52,52,48,52,52],"cmdID":100,"card1":[52,52,34,52,52]} - CMD_NOTIFY_PUBLIC_CARD
+Receive : {"cardPos":[1,1,1,0,0],"cmdID":102,"cardID":[36,35,48,52,52]} - CMD_NOTIFY_SHOW_FIRST_CARD
+Receive : {"firstTurnId":2,"cmdID":105,"cardID":[{"nCard":1,"cardID":[30,0,0]},{"nCard":1,"cardID":[38,0,0]},{"nCard":1,"cardID":[22,0,0]},{"nCard":0,"cardID":[0,0,0]},{"nCard":0,"cardID":[0,0,0]}]} - CMD_NOTIFY_DEAL_CARD
+
+Send {"_cmd":"108","ext":"Pokerhk","params":{}} - CMD_NOTIFY_DEAL_CARD_DONE
+Receive : {"turnTime":20,"turnType":1,"betType":1,"minbet":0,"cmdID":103,"playerTurn":2} - CMD_NOTIFY_CHANGE_TURN
+
+Send {"_cmd":"104","ext":"Pokerhk","params":{"chipBet":45,"betType":1}} - CMD_NOTIFY_BET_MONEY
+Receive : {"chair":2,"chipBet":45,"totalTableBet":135,"betType":1,"cmdID":104} - CMD_NOTIFY_BET_MONEY
+Receive : {"turnTime":20,"turnType":0,"betType":1,"minbet":45,"cmdID":103,"playerTurn":0} - CMD_NOTIFY_CHANGE_TURN
+Receive : {"chair":0,"chipBet":45,"totalTableBet":180,"betType":0,"cmdID":104}
+Receive : {"turnTime":20,"turnType":0,"betType":1,"minbet":45,"cmdID":103,"playerTurn":1}
+Receive : {"chair":1,"chipBet":90,"totalTableBet":270,"betType":1,"cmdID":104}
+Receive : {"turnTime":20,"turnType":2,"betType":2,"minbet":45,"cmdID":103,"playerTurn":2}
+
+Send {"_cmd":"104","ext":"Pokerhk","params":{"chipBet":45,"betType":0}}
+Receive : {"chair":2,"chipBet":45,"totalTableBet":315,"betType":0,"cmdID":104}
+Receive : {"turnTime":20,"turnType":2,"betType":2,"minbet":45,"cmdID":103,"playerTurn":0}
+Receive : {"chair":0,"chipBet":45,"totalTableBet":360,"betType":0,"cmdID":104}
+Receive : {"firstTurnId":2,"cmdID":105,"cardID":[{"nCard":1,"cardID":[41,0,0]},{"nCard":1,"cardID":[25,0,0]},{"nCard":1,"cardID":[29,0,0]},{"nCard":0,"cardID":[0,0,0]},{"nCard":0,"cardID":[0,0,0]}]} - CMD_NOTIFY_DEAL_CARD
+
+Send {"_cmd":"108","ext":"Pokerhk","params":{}} - CMD_NOTIFY_DEAL_CARD_DONE
+Receive : {"turnTime":20,"turnType":1,"betType":1,"minbet":0,"cmdID":103,"playerTurn":2} 
+
+Send {"_cmd":"104","ext":"Pokerhk","params":{"chipBet":90,"betType":1}}
+Receive : {"chair":2,"chipBet":90,"totalTableBet":450,"betType":1,"cmdID":104}
+Receive : {"turnTime":20,"turnType":0,"betType":1,"minbet":90,"cmdID":103,"playerTurn":0}
+Receive : {"chair":0,"chipBet":90,"totalTableBet":540,"betType":0,"cmdID":104}
+Receive : {"turnTime":20,"turnType":0,"betType":1,"minbet":90,"cmdID":103,"playerTurn":1}
+Receive : {"chair":1,"chipBet":90,"totalTableBet":630,"betType":0,"cmdID":104}
+Receive : {"firstTurnId":2,"cmdID":105,"cardID":[{"nCard":1,"cardID":[50,0,0]},{"nCard":1,"cardID":[32,0,0]},{"nCard":1,"cardID":[28,0,0]},{"nCard":0,"cardID":[0,0,0]},{"nCard":0,"cardID":[0,0,0]}]}
+
+Send {"_cmd":"108","ext":"Pokerhk","params":{}}
+Receive : {"turnTime":20,"turnType":1,"betType":1,"minbet":0,"cmdID":103,"playerTurn":1}
+Receive : {"turnTime":20,"turnType":3,"betType":1,"minbet":0,"cmdID":103,"playerTurn":2}
+
+Send {"_cmd":"104","ext":"Pokerhk","params":{"chipBet":157,"betType":1}}
+Receive : {"chair":2,"chipBet":157,"totalTableBet":787,"betType":1,"cmdID":104}
+Receive : {"turnTime":20,"turnType":0,"betType":1,"minbet":157,"cmdID":103,"playerTurn":0}
+Receive : {"chair":0,"chipBet":157,"totalTableBet":944,"betType":0,"cmdID":104}
+Receive : {"turnTime":20,"turnType":2,"betType":1,"minbet":157,"cmdID":103,"playerTurn":1}
+Receive : {"chair":1,"chipBet":157,"totalTableBet":1101,"betType":0,"cmdID":104}
+
+Receive : {"card2":[36,35,48,52,52],"cmdID":100,"card1":[37,21,34,52,52]} - CMD_NOTIFY_PUBLIC_CARD
+Receive : {"bean":10689,"dogfall":0,"score":734,"lostCount":0,"winCount":1,"nChair":0,"coin":3,"cmdID":50,"escapeCount":0}
+Receive : {"bean":9633,"dogfall":0,"score":-367,"lostCount":1,"winCount":0,"nChair":1,"coin":3,"cmdID":50,"escapeCount":0}
+Receive : {"bean":9633,"dogfall":0,"score":-367,"lostCount":1,"winCount":0,"nChair":2,"coin":3,"cmdID":50,"escapeCount":0}
+Receive : {"chipGet":[1057,0,0,0,0],"cmdID":9,"resultType":[1,2,2,0,0]}
+Receive : {"cmdID":8}
+
+
+
