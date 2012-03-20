@@ -3,7 +3,7 @@ package com.gsn.poker.play;
 import com.gsn.engine.myplay.GsnScreen;
 
 public class PlayScreen extends GsnScreen {
-	BoardLayer boardLayer;
+	public BoardLayer boardLayer;
 	public PlayScreen(float width, float height) {
 		super(width, height);
 		boardLayer = new BoardLayer(width, height);

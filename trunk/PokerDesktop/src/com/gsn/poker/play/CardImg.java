@@ -53,7 +53,13 @@ public class CardImg extends Image {
 			break;
 		}
 		
-		return (PokerTexture.labai.get( (la - 7) * 4 + tmp ));
+		return (PokerTexture.labai.get( (la - 5) * 4 + tmp ));
 	}
-
+	
+	public void setDark(boolean dark){
+		if (dark)
+			color.set(0.7f, 0.7f, 0.7f, 1f);
+		else
+			color.set(1.0f, 1.0f, 1.0f, 1f);
+	}
 }
