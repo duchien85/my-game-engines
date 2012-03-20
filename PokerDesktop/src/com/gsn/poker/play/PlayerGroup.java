@@ -3,14 +3,10 @@ package com.gsn.poker.play;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Delay;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
 import com.badlogic.gdx.scenes.scene2d.actions.Remove;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.gsn.engine.ActorUtility;
 import com.gsn.engine.template.GsnLabel;
 import com.gsn.poker.asset.PokerTexture;
-import com.gsn.poker.game.DataProvider;
-import com.gsn.poker.logic.Card;
 
 public class PlayerGroup extends Group {
 	protected boolean available;
@@ -39,6 +35,22 @@ public class PlayerGroup extends Group {
 	
 	public boolean isAvailable(){
 		return available;
+	}
+	
+	public void setCardID(int stt, int id){
+		cardGroup.cards[stt].setId(id);
+	}
+	
+	public int getCardID(int stt){
+		return cardGroup.cards[stt].getId();
+	}
+	
+	public void setDark(int stt, boolean dark){
+		cardGroup.cards[stt].setDark(dark);
+	}
+	
+	public void addCardID(int id){
+		cardGroup.nhanBai(id);
 	}
 	
 	public void setAvailable(boolean _available){

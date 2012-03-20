@@ -20,12 +20,13 @@ public class CardGroup extends Group {
 				cards[i].y = 0;
 			}
 			addActor(cards[i]);
-			cards[i].visible = false;
-		}
-		
+			cards[i].visible = false;		
+		}		
 		this.width = cards[NO_CARD - 1].x + cards[NO_CARD - 1].width;
-		this.height = cards[NO_CARD - 1].height;
+		this.height = cards[NO_CARD - 1].height;				
 	}
+	
+	
 	
 	public void nhanBai(int id){
 		cards[numCard].setId(id);

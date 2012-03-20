@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 
 public class PokerTexture {
 	static public final String tag = "Chess Texture";
@@ -25,6 +24,8 @@ public class PokerTexture {
 	public static AtlasRegion baiUp;
 	public static AtlasRegion infoUser;
 	public static AtlasRegion boChonBtn;
+	public static AtlasRegion readyBtn;
+	public static AtlasRegion readyBtnDown;
 	
 	public static List<AtlasRegion> labai;
 	

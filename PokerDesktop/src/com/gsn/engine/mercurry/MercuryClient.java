@@ -135,7 +135,7 @@ public class MercuryClient implements IPingListener{
 			;
 	}
 
-	private ByteBuffer buf = ByteBuffer.allocateDirect(1024);
+	private ByteBuffer buf = ByteBuffer.allocateDirect(2048);
 
 	private String host;
 
@@ -165,7 +165,7 @@ public class MercuryClient implements IPingListener{
 		thread = new Thread(new MyThread());
 		thread.setDaemon(true);
 		thread.start();
-		ping.loopPing(1500, 1500);
+	//	ping.loopPing(1500, 1500);
 		timeoutNum = 0;
 	}
 
@@ -267,6 +267,7 @@ public class MercuryClient implements IPingListener{
 					arr[i].trim();
 					try {
 						if (arr[i].length() > 0) {
+							//System.out.println(" ------------------- loi me no roi " + arr[i]);
 							JSONObject json = new JSONObject(arr[i]);
 							listener.onReceivedJson(json);
 						}

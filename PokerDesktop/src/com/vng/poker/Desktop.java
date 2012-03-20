@@ -1,7 +1,7 @@
 package com.vng.poker;
 
 import com.badlogic.gdx.backends.jogl.JoglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.gsn.engine.mercurry.MercuryClient;
 import com.gsn.poker.game.MyPoker;
 import com.gsn.poker.game.PokerGame;
 
@@ -26,6 +26,12 @@ public class Desktop {
 	
 	public static void binder(){
 		MyPoker.game = game;
+		
+		
+		MercuryClient client = new MercuryClient("10.198.36.66", 443, game);
+		client.connect();
+		
+		MyPoker.client = client;
 	}
 	
 	static PokerGame game;
