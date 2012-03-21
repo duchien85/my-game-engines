@@ -162,6 +162,13 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 				json = new JSONObject(s);
 				updateMoney(json);
 				break;
+			case Keys.A:				 
+				 MyPoker.client.send(PacketFactory.createTheo(minBet));
+				break;
+			case Keys.S:
+				//up bo							
+				MyPoker.client.send(PacketFactory.createFold());
+				break;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -169,9 +176,11 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 		return super.keyDown(keycode);
 	}
 
-	private void endGame(JSONObject json) {
+	public void endGame(JSONObject json) {
 		try {
 			JSONArray result = json.getJSONArray("resultType");
+			for (int i = 0; i < 5;i++)
+				players[i].newGame();
 			switch (result.getInt(myChair)){			
 			case 1:
 				win();
@@ -191,12 +200,12 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 
 	private void lose() {
 		Gdx.app.log(tag, "lose");
-		
+		readyBtn.visible = true;
 	}
 
 	private void win() {
-		Gdx.app.log(tag, "win");
-		
+		Gdx.app.log(tag, "win");		
+		readyBtn.visible = true;
 	}
 
 	private void updateMoney(JSONObject json) {
@@ -242,18 +251,28 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 	public void click(Actor actor, float x, float y) {
 		if (actor == readyBtn){
 			readyBtn.visible = false;
-			MyPoker.client.send(PacketFactory.createReady());
+			MyPoker.client.send(PacketFactory.createReady());			
 		}
 		
 	}
 
 	public void start() {
-		Gdx.app.log(tag, "Game Start");
-		
+		Gdx.app.log(tag, "Game Start");		
+	}
+	
+	int minBet;
+
+	public void changeTurn(int playerTurn, JSONObject json) {
+		players[ (playerTurn + 5 - myChair) % 5].setText("Chuyển Lượt", 5f);		
+		try {
+			minBet = json.getInt("minbet");
+		} catch (JSONException e) {		
+			e.printStackTrace();
+		}
 	}
 
-	public void changeTurn(int playerTurn) {
-		players[ (playerTurn + 5 - myChair) % 5].setText("Chuyển Lượt", 5f);
+	public void fold(int nChair) {
+		players[(nChair + 5 - myChair) % 5].setText("FOLD", 3);
 		
 	}	
 }

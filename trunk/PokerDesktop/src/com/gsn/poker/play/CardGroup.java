@@ -27,6 +27,12 @@ public class CardGroup extends Group {
 	}
 	
 	
+	public void newGame(){
+		for (int i = 0; i < NO_CARD;i++){
+			cards[i].visible = false;
+			numCard = 0;
+		}
+	}
 	
 	public void nhanBai(int id){
 		cards[numCard].setId(id);

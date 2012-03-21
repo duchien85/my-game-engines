@@ -103,7 +103,8 @@ public class PokerGame extends GsnGame implements IMercuryListener {
 				JSONArray playerList = json.getJSONArray("playerList");
 				
 				for (int i = 0; i < 5; i++)
-					if (playerStatus.getInt(i) == 1){
+					if (playerStatus.getInt(i) >0){
+						// ==2 là đã sẵn sàng, 1 là chưa sẵn sàng
 						JSONObject jp = playerList.getJSONObject(i);
 						String name = jp.getString("uName");
 						String avatar = jp.getString("avtURL");
@@ -151,7 +152,17 @@ public class PokerGame extends GsnGame implements IMercuryListener {
 				break;
 			case CmdDefine.CMD_NOTIFY_CHANGE_TURN:
 				int playerTurn = json.getInt("playerTurn");
-				playScreen.boardLayer.changeTurn(playerTurn);				
+				playScreen.boardLayer.changeTurn(playerTurn, json);				
+				break;
+			case CmdDefine.CMD_NOTIFY_FOLD:
+				nChair = json.getInt("nChair");
+				playScreen.boardLayer.fold(nChair);
+				break;
+			case CmdDefine.CMD_NOTIFY_GAME_RESULT:
+				playScreen.boardLayer.endGame(json);
+				break;
+			case CmdDefine.CMD_NOTIFY_DEAL_CARD:
+				playScreen.boardLayer.dealCard(json);
 				break;
 			}
 		} catch (JSONException e) {
