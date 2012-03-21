@@ -59,5 +59,29 @@ public class PacketFactory {
 			}		
 			return json;
 	}
+
+	public static JSONObject createFold() {
+		JSONObject json = null;
+		try {
+			String s = "{\"ext\":\"Pokerhk\",\"params\":{},\"_cmd\":\"106\"}";
+			json = new JSONObject(s);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}		
+		return json;
+	}
+
+	public static JSONObject createTheo(int bet) {		
+		JSONObject json = null;
+		try {
+			String s = "{\"ext\":\"Pokerhk\",\"params\":{\"betType\":0,\"chipBet\":" + bet + "},\"_cmd\":\"104\"}";
+			json = new JSONObject(s);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}		
+		return json;
+
+	}
+	
 	
 }

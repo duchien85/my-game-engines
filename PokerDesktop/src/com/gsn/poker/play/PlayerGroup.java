@@ -61,7 +61,7 @@ public class PlayerGroup extends Group {
 	}
 	
 	public void setText(String text, float duration){
-		GsnLabel label = new GsnLabel(text, PokerTexture.fontLarge, new Color(0.8f, 0f, 0, 1));
+		GsnLabel label = new GsnLabel(text, PokerTexture.fontLarge, new Color(1f, 1f, 1f, 1));
 		ActorUtility.setCenter(label, cardGroup.x + cardGroup.width / 2, cardGroup.y + cardGroup.height / 2);
 		label.action(Delay.$(Remove.$(), duration));
 		addActor(label);
@@ -76,5 +76,10 @@ public class PlayerGroup extends Group {
 	
 	public void nhanBai(int idCard){
 		cardGroup.nhanBai(idCard);
+	}
+
+	public void newGame() {
+		cardGroup.newGame();
+		
 	}
 }
