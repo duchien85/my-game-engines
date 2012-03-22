@@ -29,7 +29,7 @@ public class Desktop {
 		
 		
 		MercuryClient client = new MercuryClient("10.198.36.66", 443, game);
-		client.connect();
+		//client.connect();
 		
 		MyPoker.client = client;
 	}

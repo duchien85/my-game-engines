@@ -1,14 +1,19 @@
 package com.gsn.poker.play;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Delay;
+import com.badlogic.gdx.scenes.scene2d.actions.Remove;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.gsn.engine.ActorUtility;
 
 public class CardGroup extends Group {
 	final static int NO_CARD = 5;
 	int numCard = 0;
 	CardImg[] cards = new CardImg[NO_CARD];
-	int pad;
+	float pad = 5;
 	int id;
-	public CardGroup() {		
+	public CardGroup() {
+		int pad;
 		for (int i = 0; i < NO_CARD; i++){			
 			cards[i] = new CardImg(52);
 			pad = (int) (cards[i].width / 2);
@@ -38,5 +43,12 @@ public class CardGroup extends Group {
 		cards[numCard].setId(id);
 		cards[numCard].visible = true;
 		numCard++;
+	}
+
+	
+	public void showImg(Image anh, float duration) {
+		addActor(anh);
+		ActorUtility.setRatio(anh, 0.5f, 0, width / 2, pad);
+		anh.action(Delay.$(Remove.$(), 2f));
 	}
 }

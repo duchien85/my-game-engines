@@ -15,6 +15,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class PokerTexture {
+	public static List<AtlasRegion> labai;
+	public static List<AtlasRegion> vien;
+	
+	public static BitmapFont fontMedium;
+	public static BitmapFont fontLarge;
+	
 	static public final String tag = "Chess Texture";
 	static public AssetManager manager;
 	static public AtlasRegion board;
@@ -26,11 +32,10 @@ public class PokerTexture {
 	public static AtlasRegion boChonBtn;
 	public static AtlasRegion readyBtn;
 	public static AtlasRegion readyBtnDown;
-	
-	public static List<AtlasRegion> labai;
-	
-	public static BitmapFont fontMedium;
-	public static BitmapFont fontLarge;
+	public static AtlasRegion BgAlpha;	
+	public static AtlasRegion xepBtn;
+	public static AtlasRegion xepBtnDown;
+	public static AtlasRegion chuUpBo;		
 
 	static public void finishLoading() {
 		manager.finishLoading();

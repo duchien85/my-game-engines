@@ -16,20 +16,18 @@ import com.gsn.engine.IDowloader;
 import com.gsn.engine.mercurry.Ping.IPingListener;
 
 public class MercuryClient implements IPingListener{
-	public interface IMercuryListener {
+	public static interface IMercuryListener {
 		void onConnected();
 
 		void onDisconnected();
 
+		void onException(Exception ex);
+
 		void onReceived(String s);
 
 		void onReceivedJson(JSONObject json);
-
-		void onException(Exception ex);
 	}
 	
-	Ping ping;
-
 	private class MyThread implements Runnable {
 		@Override
 		public void run() {
@@ -82,8 +80,8 @@ public class MercuryClient implements IPingListener{
 
 		}
 	}
-	public static MercuryClient m;
 
+	public static MercuryClient m;
 	public static void main(String[] args) {
 		System.out.println("chay...");
 		m = new MercuryClient("118.102.3.16", 443, new IMercuryListener() {
@@ -100,6 +98,13 @@ public class MercuryClient implements IPingListener{
 			public void onDisconnected() {
 				// TODO Auto-generated method stub
 				System.out.println("disconnect");
+			}
+
+			@Override
+			public void onException(Exception ex) {
+				// TODO Auto-generated method stub
+				System.out.println("exception mercury : " );
+				ex.printStackTrace();
 			}
 
 			@Override
@@ -122,13 +127,6 @@ public class MercuryClient implements IPingListener{
 				// TODO Auto-generated method stub
 				System.out.println("receive JSON: " + json);
 			}
-
-			@Override
-			public void onException(Exception ex) {
-				// TODO Auto-generated method stub
-				System.out.println("exception mercury : " );
-				ex.printStackTrace();
-			}
 		});
 		m.connect();
 		while (true)
@@ -137,9 +135,13 @@ public class MercuryClient implements IPingListener{
 
 	private ByteBuffer buf = ByteBuffer.allocateDirect(2048);
 
+	public IDowloader downloader;
+
 	private String host;
 
 	private IMercuryListener listener;
+
+	Ping ping;
 
 	private int port;
 
@@ -152,6 +154,8 @@ public class MercuryClient implements IPingListener{
 	private boolean stop;
 
 	private Thread thread;
+
+	int timeoutNum = 0;
 
 	public MercuryClient(String host, int port, IMercuryListener listener) {
 		this.listener = listener;
@@ -202,6 +206,19 @@ public class MercuryClient implements IPingListener{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}		
+	}
+
+	@Override
+	public void onPing(long time) {
+	//	System.out.println("ping : " + time);
+		if (time >= 0){
+			timeoutNum = 0;
+		} else {
+			timeoutNum++;
+			if (timeoutNum >= 3){
+				disconnect();				
+			}
 		}		
 	}
 
@@ -283,15 +300,17 @@ public class MercuryClient implements IPingListener{
 	public void send(JSONObject json) {		
 		send(json.toString());
 	}
-
+	
 	public void send(String s) {
 		queue.add(s);
 	}
-
+	
 	public void setListener(IMercuryListener listener) {
 		this.listener = listener;
 	}
-
+	
+	
+	
 	private void write(SocketChannel socketChannel) throws Exception {
 		// TODO Auto-generated method stub
 		String s = queue.poll();
@@ -309,23 +328,4 @@ public class MercuryClient implements IPingListener{
 		int numBytesWritten = socketChannel.write(buf);		
 		buf.clear();
 	}
-	
-	int timeoutNum = 0;
-	
-	@Override
-	public void onPing(long time) {
-	//	System.out.println("ping : " + time);
-		if (time >= 0){
-			timeoutNum = 0;
-		} else {
-			timeoutNum++;
-			if (timeoutNum >= 3){
-				disconnect();				
-			}
-		}		
-	}
-	
-	
-	
-	public IDowloader downloader;
 }

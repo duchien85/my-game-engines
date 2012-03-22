@@ -13,7 +13,7 @@ import com.gsn.poker.packet.PacketFactory;
 import com.gsn.poker.play.PlayScreen;
 import com.gsn.poker.play.UserInfo;
 
-public class PokerGame extends GsnGame implements IMercuryListener {
+public class PokerGame extends GsnGame implements IMercuryListener{
 	PlayScreen playScreen;
 	private String tag = "Poker Game";
 
@@ -48,8 +48,8 @@ public class PokerGame extends GsnGame implements IMercuryListener {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		MyPoker.client.disconnect();
+		// TODO Auto-generated method stubs
+		//MyPoker.client.disconnect();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class PokerGame extends GsnGame implements IMercuryListener {
 
 		// MyPoker.client.send(PacketFactory.createLogin());
 		String name = "t" + (int) (Math.random() * 1000);
-		String s = "{\"handler\": \"login\", \"username\":\"" +  name + "\", \"password\":\"dawdwad\"}";
+		String s = "{\"handler\": \"login\", \"username\":\"" +  name + "\", \"password\":\"dawdwad\"}";		
 		MyPoker.client.send(s);
 	}
 

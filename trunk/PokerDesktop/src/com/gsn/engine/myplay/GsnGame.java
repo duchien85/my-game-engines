@@ -3,8 +3,9 @@ package com.gsn.engine.myplay;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
+import com.gsn.engine.mercurry.MercuryClient.IMercuryListener;
 
-abstract public class GsnGame implements ApplicationListener {
+abstract public class GsnGame implements ApplicationListener{
 	public GsnScreen currentScreen;
 	public float width, height;
 	
