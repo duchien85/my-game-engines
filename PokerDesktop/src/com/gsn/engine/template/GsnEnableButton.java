@@ -8,13 +8,11 @@ public class GsnEnableButton extends GsnNormalButton {
 	ImageButtonStyle disableState;
 	Boolean enable;
 	ImageButtonStyle enableState;
-	public int id;
-	public String nameButton;
+	public int id;	
 	public GsnEnableButton(int id, String name, TextureRegion normal, TextureRegion down, TextureRegion disable) {
 		super(name, normal, down, normal);
 		enableState = new ImageButtonStyle(null, null, null, 0, 0, 0, 0, normal, down, normal);
-		disableState = new ImageButtonStyle(null, null, null, 0, 0, 0, 0, disable, disable, disable);
-		
+		disableState = new ImageButtonStyle(null, null, null, 0, 0, 0, 0, disable, disable, disable);		
 		this.id = id;
 	}
 

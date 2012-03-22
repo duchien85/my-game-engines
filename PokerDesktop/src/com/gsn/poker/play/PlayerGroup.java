@@ -1,10 +1,13 @@
 package com.gsn.poker.play;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Delay;
 import com.badlogic.gdx.scenes.scene2d.actions.Remove;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.gsn.engine.ActorUtility;
+import com.gsn.engine.GdxUtility;
 import com.gsn.engine.template.GsnLabel;
 import com.gsn.poker.asset.PokerTexture;
 
@@ -16,19 +19,46 @@ public class PlayerGroup extends Group {
 	UserInfo info;
 	int pad = 5;
 	private BoardLayer boardLayer;
+	Image effDenLuotImg;
 	
-	public PlayerGroup(BoardLayer boardLayer, int id) {
+	public PlayerGroup(int type, BoardLayer boardLayer, int id) {
 		this.id = id;
 		this.boardLayer = boardLayer;
-		avatar = new AvatarUser();
-		addActor(avatar);		
-		
+				
+		avatar = new AvatarUser();		
 		cardGroup = new CardGroup();
-		ActorUtility.setRatio(cardGroup, 0, 0.5f, avatar.x + avatar.width + pad, avatar.height / 2);
+		
+		this.width = avatar.width + pad + cardGroup.width;
+		this.height = avatar.height;
+		
+		if (type == 0){
+			ActorUtility.setRatio(avatar, 0f, 0f, 0, 0);
+			ActorUtility.setRatio(cardGroup, 0, 0.5f, avatar.x + avatar.width + pad, avatar.height / 2);
+		} else {
+			ActorUtility.setRatio(avatar, 1, 0.5f, width, height / 2);
+			ActorUtility.setRatio(cardGroup, 0, 0.5f, 0, height / 2);			
+		}
+		
+		this.width += 2 * pad;
+		this.height += 2 * pad;
+		avatar.x += pad;
+		avatar.y += pad;
+		cardGroup.x += pad;
+		cardGroup.y += pad;
+		
+		Image bg = new Image(PokerTexture.BgAlpha);
+		bg.width = width;
+		bg.height = height;
+		
+		addActor(bg);
+		addActor(avatar);
 		addActor(cardGroup);
 		
-		this.width = avatar.x + avatar.width + pad + cardGroup.width;
-		this.height = avatar.height;
+		effDenLuotImg = new Image(new NinePatch(GdxUtility.convertListRegionToArray(PokerTexture.vien)));
+		effDenLuotImg.width = width;
+		effDenLuotImg.height = height;
+		addActor(effDenLuotImg);
+		effDenLuotImg.visible = false;
 		
 		setAvailable(false);
 	}
@@ -80,6 +110,24 @@ public class PlayerGroup extends Group {
 
 	public void newGame() {
 		cardGroup.newGame();
+		
+	}
+
+	public void chiaBai(int cardID, float duration) {
+		
+		
+	}
+
+	public void effDenLuot() {
+		effDenLuotImg.visible = true;
+	}
+	
+	public void effQuaLuot() {
+		effDenLuotImg.visible = false;
+	}
+
+	public void upBo() {
+		cardGroup.showImg(new Image(PokerTexture.chuUpBo), 2f);
 		
 	}
 }
