@@ -128,6 +128,7 @@ public class PlayerGroup extends Group {
 
 	public void upBo() {
 		cardGroup.showImg(new Image(PokerTexture.chuUpBo), 2f);
-		
+		for (int i = 0; i < cardGroup.numCard; i++)
+			cardGroup.cards[i].setId(52);
 	}
 }

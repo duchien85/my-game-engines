@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
 import com.badlogic.gdx.scenes.scene2d.actions.Remove;
 import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
@@ -21,6 +22,7 @@ import com.gsn.engine.myplay.GsnLayer;
 import com.gsn.engine.template.GsnEnableButton;
 import com.gsn.poker.asset.PokerTexture;
 import com.gsn.poker.game.MyPoker;
+import com.gsn.poker.game.Settings;
 import com.gsn.poker.packet.PacketFactory;
 
 public class BoardLayer extends GsnLayer implements ClickListener {
@@ -62,18 +64,21 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 		bg.width = width;
 		bg.height = height;
 		addActor(bg);
-
-		// bobai = new Image(PokerTexture.baiUp);
-		// ActorUtility.setCenter(bobai, width / 2, height / 2);
-		// addActor(bobai);
-		// DataProvider.bobai = bobai;
-
-		// ButtonGroup btnGroup = new ButtonGroup();
-		// ActorUtility.setRatio(btnGroup, 1f, 0f, width, 0);
-		// addActor(btnGroup);
-
+		
+		BetInfoGroup betInfo = new BetInfoGroup(10000);
+		addActor(betInfo);
+		ActorUtility.setRatio(betInfo, 0, 1, 0, height - pad);
+		
 		ImageButton menuBtn = new ImageButton(PokerTexture.menuBtn, PokerTexture.menuBtnDown);
 		ActorUtility.setRatio(menuBtn, 1f, 1f, width, height);
+		addActor(menuBtn);
+		
+		ImageButton chatBtn = new ImageButton(PokerTexture.menuBtn, PokerTexture.menuBtnDown);
+		ActorUtility.setRatio(chatBtn, 1f, 1f, menuBtn.x, height);
+		addActor(chatBtn);
+		
+		float heightMenu =  betInfo.height + pad;
+	
 
 		for (int i = 0; i < players.length; i++) {
 			if (i == 1 || i == 2)
@@ -84,21 +89,25 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 		}
 
 		ActorUtility.setRatio(players[0], 0.5f, 0, width / 2, 0);
-		ActorUtility.setRatio(players[1], 1f, 0.5f, width, height / 2);
-		ActorUtility.setRatio(players[2], 1f, 1f, width, height);
-		ActorUtility.setRatio(players[3], 0f, 1f, 0, height);
-		ActorUtility.setRatio(players[4], 0, 0.5f, 0, height / 2);
+		ActorUtility.setRatio(players[1], 1f, 0.5f, width, (height - heightMenu) / 2);
+		ActorUtility.setRatio(players[2], 1f, 1f, width, (height - heightMenu));
+		ActorUtility.setRatio(players[3], 0f, 1f, 0, (height - heightMenu));
+		ActorUtility.setRatio(players[4], 0, 0.5f, 0, (height - heightMenu) / 2);
 
 		readyBtn = new ImageButton(PokerTexture.readyBtn, PokerTexture.readyBtnDown);
 		ActorUtility.setCenter(readyBtn, width / 2, height / 2);
-		// addActor(readyBtn);
+		addActor(readyBtn);
 		readyBtn.setClickListener(this);
+		
+		
+		if (Settings.mode == 0) {
+			players[0].setAvailable(true);
+			players[3].setAvailable(true);
+			players[4].setAvailable(true);
 
-		players[0].setAvailable(true);
-		players[3].setAvailable(true);
-		players[4].setAvailable(true);
-
-		players[2].setAvailable(true);
+			players[2].setAvailable(true);
+			readyBtn.visible = false;
+		}
 		//players[1].setAvailable(true);
 				
 		addBtn();
@@ -194,9 +203,7 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 		return time;
 	}
 
-	public void chia2LaDau(final int id1, final int id2) {
-		card1 = id1;
-		card2 = id2;
+	public void chia2LaDau() {
 		float time = chia1vong(myChair, 52, 52, 52, 52, 52);
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -206,17 +213,7 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 				chia1vong(myChair, 52, 52, 52, 52, 52);
 				
 			}
-		}, (int) (1000 * time));
-		
-		Timer timer2 = new Timer();
-		timer2.schedule(new TimerTask() {
-			
-			@Override
-			public void run() {
-				showChonQuan(id1, id2);				
-			}
-		}, (int) (2 * 1000 * time));
-		
+		}, (int) (1000 * time));					
 	}
 
 	public void chiaBai(final int playerID, final int cardID, final float duration) {
@@ -248,7 +245,13 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 		}
 		
 		if (actor instanceof GsnEnableButton){
-			Gdx.app.log(tag, "click button : " + ((GsnEnableButton) actor).nameButton);
+			String name = ((GsnEnableButton) actor).nameButton;
+			Gdx.app.log(tag, "click button : " + name);
+			if (name.equals(TO_NUA))
+				 MyPoker.client.send(PacketFactory.createTheo(minBet));
+			else if (name.equals(TO_TU))
+				MyPoker.client.send(PacketFactory.createFold());			
+			
 		}
 
 	}
@@ -347,7 +350,8 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 		try {
 			switch (keycode) {
 			case Keys.F1:
-				chia2LaDau(36, 48);
+				chia2LaDau();
+				showChonQuan(48, 34);
 				break;
 			case Keys.F2:
 				showFirstCard(34, 35, 36, 52, 52);
@@ -388,6 +392,15 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 			case Keys.E:
 				players[0].upBo();
 				break;
+			case Keys.R:
+				start();
+				break;
+			case Keys.T:
+				win();
+				break;
+			case Keys.Y:
+				lose();
+				break;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -396,9 +409,16 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 	}
 
 	private void lose() {
-		Gdx.app.log(tag, "lose");
-		readyBtn.visible = true;
-	}
+		float duration = showEff(new Image(PokerTexture.effectThua));
+		
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				readyBtn.visible = true;				
+			}
+		}, (int)(duration * 1000));	}
 
 	public void setUserInfor(int chair, UserInfo info) {
 		int stt = (chair + 5 - myChair) % 5;
@@ -406,7 +426,9 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 		players[stt].setAvailable(true);
 	}
 
-	private void showChonQuan(int id1, int id2) {
+	public void showChonQuan(int id1, int id2) {
+		card1 = id1;
+		card2 = id2;
 		chonGroup = new ChonQuanGroup(this, id1, id2);
 		ActorUtility.setCenter(chonGroup, width / 2, height / 2);
 		addActor(chonGroup);
@@ -415,9 +437,15 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 
 	public void showFirstCard(int... cards) {
 		chonGroup.remove();
+		Gdx.app.log(tag, "show First Card: ");
+		for (int i = 0; i < 5; i++){
+			Gdx.app.log(tag, " " + cards[i]);
+		}
 		for (int i = 0; i < 5; i++) {
 			if (cards[(i + myChair) % 5] != 52) {
+				Gdx.app.log(tag, "dc hien" + cards[i]);
 				players[i].setCardID(1, cards[(i + myChair) % 5]);
+				
 			}
 		}
 		if (cards[myChair] == card1)
@@ -445,9 +473,28 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 			e.printStackTrace();
 		}
 	}
+	
+	public float showEff(Image img){
+		float duration = 1.5f;
+		ActorUtility.setCenter(img, width / 2, height / 2);
+		addActor(img);
+		img.action(Sequence.$(FadeOut.$(1.5f), Remove.$()));
+		return duration;
+	}
 
 	public void start() {
 		Gdx.app.log(tag, "Game Start");
+		Image effStart = new Image(PokerTexture.effStart);
+		float dur = showEff(effStart);
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				chia2LaDau();
+			}
+		}, (int) (dur * 1000));		
 	}
 
 	private void updateMoney(JSONObject json) {
@@ -466,6 +513,16 @@ public class BoardLayer extends GsnLayer implements ClickListener {
 
 	private void win() {
 		Gdx.app.log(tag, "win");
-		readyBtn.visible = true;
+		float duration = showEff(new Image(PokerTexture.effectThang));
+		
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				readyBtn.visible = true;				
+			}
+		}, (int)(duration * 1000));
+		
 	}
 }

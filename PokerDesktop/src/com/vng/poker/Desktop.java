@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.jogl.JoglApplication;
 import com.gsn.engine.mercurry.MercuryClient;
 import com.gsn.poker.game.MyPoker;
 import com.gsn.poker.game.PokerGame;
+import com.gsn.poker.game.Settings;
 
 public class Desktop {
 
@@ -29,7 +30,8 @@ public class Desktop {
 		
 		
 		MercuryClient client = new MercuryClient("10.198.36.66", 443, game);
-		//client.connect();
+		if (Settings.mode == 1)
+			client.connect();
 		
 		MyPoker.client = client;
 	}

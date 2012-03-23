@@ -1,10 +1,14 @@
 package com.gsn.poker.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 import com.gsn.engine.mercurry.MercuryClient.IMercuryListener;
 import com.gsn.engine.myplay.GsnGame;
 import com.gsn.poker.asset.PokerTexture;
@@ -16,6 +20,7 @@ import com.gsn.poker.play.UserInfo;
 public class PokerGame extends GsnGame implements IMercuryListener{
 	PlayScreen playScreen;
 	private String tag = "Poker Game";
+	public List<JSONObject> jsonList = new ArrayList<JSONObject>();
 
 	@Override
 	public void create() {
@@ -26,6 +31,19 @@ public class PokerGame extends GsnGame implements IMercuryListener{
 		playScreen = new PlayScreen(width, height);
 
 		setScreen(playScreen);
+				
+		if (Settings.onDT){
+			for (JSONObject json : DataProvider.json){
+				Gdx.app.log(tag, "json trong queue cua Activity : "+ json);
+				onReceivedJson(json);
+			}
+			DataProvider.json.clear();
+			DataProvider.dangChuyen = false;
+			for (JSONObject json : jsonList){
+				Gdx.app.log(tag, "json trong queue cua Game: "+ json);
+				onReceivedJson(json);
+			}
+		}
 	}
 
 	@Override
@@ -49,7 +67,8 @@ public class PokerGame extends GsnGame implements IMercuryListener{
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stubs
-		//MyPoker.client.disconnect();
+		if (Settings.mode == 1)
+			MyPoker.client.disconnect();
 	}
 
 	@Override
@@ -79,6 +98,10 @@ public class PokerGame extends GsnGame implements IMercuryListener{
 		try {
 			if (json.has("cmdID") && json.getInt("cmdID") != 203)
 				Gdx.app.log(tag, "receive : " + json);
+			if (DataProvider.dangChuyen){
+				jsonList.add(json);
+				return;
+			}
 			if (json.has("loginOK")) {
 				if (json.getInt("loginOK") == 0) 
 					MyPoker.client.send(PacketFactory.createLogin());
@@ -138,7 +161,7 @@ public class PokerGame extends GsnGame implements IMercuryListener{
 			case CmdDefine.CMD_NOTIFY_PUBLIC_CARD:
 				JSONArray card1 = json.getJSONArray("card1");
 				JSONArray card2 = json.getJSONArray("card2");
-				playScreen.boardLayer.chia2LaDau(card1.getInt(myChair), card2.getInt(myChair));
+				playScreen.boardLayer.showChonQuan(card1.getInt(myChair), card2.getInt(myChair));
 				break;
 			case CmdDefine.CMD_NOTIFY_SHOW_FIRST_CARD:
 				int[] cards = new int[5];
