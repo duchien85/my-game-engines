@@ -35,7 +35,12 @@ public class PokerTexture {
 	public static AtlasRegion BgAlpha;	
 	public static AtlasRegion xepBtn;
 	public static AtlasRegion xepBtnDown;
-	public static AtlasRegion chuUpBo;		
+	public static AtlasRegion chuUpBo;
+	public static AtlasRegion iconUSDcuoc;	
+	public static AtlasRegion effStart;
+	public static AtlasRegion effectThang;
+	public static AtlasRegion effectThua;
+	
 
 	static public void finishLoading() {
 		manager.finishLoading();
@@ -52,6 +57,7 @@ public class PokerTexture {
 		fontMedium = manager.get("poker/font/medium.fnt", BitmapFont.class);
 		fontLarge = manager.get("poker/font/large.fnt", BitmapFont.class);
 		//board = atlas.findRegion("BG1");
+		effStart = atlas.findRegion("startBtn");
 		
 		Field[] fields = PokerTexture.class.getFields();
 		for (int i = 0; i < fields.length; i++) {
